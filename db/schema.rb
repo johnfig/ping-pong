@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120065004) do
+ActiveRecord::Schema.define(version: 20140120085434) do
+
+  create_table "games", force: true do |t|
+    t.integer  "winner_id"
+    t.integer  "loser_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -25,6 +32,8 @@ ActiveRecord::Schema.define(version: 20140120065004) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "ranking"
+    t.integer  "score",                 default: 0
   end
 
 end
