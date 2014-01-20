@@ -1,25 +1,46 @@
 class Game < ActiveRecord::Base
-	before_save :set_player_rankings
-
-
-
-
+	before_save :update_scores
 
 	private
 
-	def set_player_rankings
-		puts self.inspect
-		puts self.winner_id
-		puts self.loser_id
-		winner = User.find(self.winner_id)
-		loser = User.find(self.loser_id)
-		# self.update(winner_ranking: 1, loser_ranking: 2)
+	def update_scores
+		@loser = User.find(self.loser_id)
+		@winner = User.find(self.winner_id)
+		
+		calculate_expected_outcome(@loser, @winner)
 
-		# self.update_attribute(:winner_ranking, winner.ranking)
-		# self.update_attribute(:loser_ranking, loser.ranking)
-		# puts self.inspect
-		# puts "Winner ranking: #{winner_ranking}"
-		# puts "Loser ranking: #{loser_ranking}"
-		# ap self
+		@winner.score += 10
+		@winner.save
+		@loser.score -= 5 
+		@loser.save
+
+		update_rankings
+	end
+
+	def calculate_expected_outcome(loser, winner)
+		# if winner.ranking < loser.ranking 
+		# 	@expected_winner = winner 
+		# 	@expected_loser = loser
+		# 	calculate_weighted_average(@expected_loser, @expected_winner)
+		# elsif winner.ranking > loser.ranking 
+		#   @expected_winner = loser
+		# 	@expected_loser = winner
+		# 	calculate_weighted_average(@expected_loser, @expected_winner)
+		# end
+	end
+
+	def calculate_weighted_average(expected_loser, expected_winner)
+		# @expected_winner_weighted_average =  expected_loser
+		# @expected_loser_weighted_average = 
+	end
+
+	def update_rankings
+		@users = User.all
+		@users.order!("score desc")
+		ranking = 1
+		@users.each do |x|
+			x.update(ranking:ranking)
+			ranking += 1
+		end
 	end
 end
