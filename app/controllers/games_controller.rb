@@ -26,6 +26,10 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    loser = User.find(game_params[:loser_id])
+    winner = User.find(game_params[:winner_id])
+    @game.update(winner_ranking: winner.ranking, loser_ranking: loser.ranking)
+
 
     respond_to do |format|
       if @game.save
