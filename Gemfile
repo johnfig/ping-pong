@@ -9,10 +9,13 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem "paperclip", "~> 3.5.2"
 gem "pg", "~> 0.17.1"
-gem 'sqlite3'
 
 group :doc do
   gem 'sdoc', require: false
+end
+
+group :development do
+	gem 'sqlite3'
 end
 
 group :test do
