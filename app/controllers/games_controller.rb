@@ -25,11 +25,14 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
+    if game_params[:winner_id] == game_params[:loser_id]
+      redirect_to root_url, :flash => { :error => "You can't play yourself silly" }
+    end
+
     @game = Game.new(game_params)
     loser = User.find(game_params[:loser_id])
     winner = User.find(game_params[:winner_id])
     @game.update(winner_ranking: winner.ranking, loser_ranking: loser.ranking)
-
 
     respond_to do |format|
       if @game.save
