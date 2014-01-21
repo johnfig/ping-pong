@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.update(ranking:User.all.count + 1)
 
     respond_to do |format|
       if @user.save
@@ -70,6 +71,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :username, :password, :password_confirmation, :avatar)
+      params.require(:user).permit(:first_name, :last_name, :username, :password, :password_confirmation, :score, :ranking, :avatar)
     end
 end
