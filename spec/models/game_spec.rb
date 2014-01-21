@@ -23,8 +23,8 @@ describe Game do
 			user_2
 			game
 
-			user_1.score.should == 5
-			user_2.score.should == 2	
+			user_1.reload.score.should == 5
+			user_2.reload.score.should == -2	
 		end
 
 		it "Should change rankings if user_2 beats user_1 in first game" do
@@ -33,8 +33,8 @@ describe Game do
 			game_2 = FactoryGirl.create :game, winner_id: user_2.id, loser_id: user_1.id
 			game_3 = FactoryGirl.create :game, winner_id: user_2.id, loser_id: user_1.id
 
-			user_2.ranking.should == 1
-			user_1.ranking.should == 2
+			user_2.reload.ranking.should == 1
+			user_1.reload.ranking.should == 2
 		end
 	end
 end

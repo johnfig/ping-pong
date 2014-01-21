@@ -13,7 +13,7 @@ class Game < ActiveRecord::Base
 	def update_scores
 		@loser = User.find(self.loser_id)
 		@winner = User.find(self.winner_id)
-		
+	
 		calculate_expected_outcome(@loser, @winner)
 
 		puts "Updated_scores weighted_average: #{@weighted_average}"
