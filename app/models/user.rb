@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+	validate :password_confirmation_should_equal_password
+
 	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" },
 														 :url  => "/assets/products/:id/:style/:basename.:extension",
 						                 :path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
@@ -10,4 +13,10 @@ class User < ActiveRecord::Base
 	validates :last_name, 						presence: true
 	validates :username,						  presence: true,
 																		uniqueness: true
+
+  private
+
+  def password_confirmation_should_equal_password
+  	errors.add(:base, "Password can't be the same silly") if self.password != self.password_confirmation
+	end								 										
 end
