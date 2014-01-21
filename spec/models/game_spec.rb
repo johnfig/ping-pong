@@ -1,0 +1,40 @@
+require 'spec_helper'
+
+describe Game do
+  let(:user_1)  { FactoryGirl.create :user, first_name: "John", 
+  																					last_name: "Fig", 
+  																					username: "johnfig", 
+  																					password: "password", 
+  																					password_confirmation: "password",
+  																					score: 0,
+  																					ranking: 1 }
+  let(:user_2)  { FactoryGirl.create :user, first_name: "Hello", 
+  																					last_name: "World", 
+  																					username: "HelloWorld", 
+  																					password: "password", 
+  																					password_confirmation: "password",
+  																					score: 0,
+  																					ranking: 2 }
+  let(:game)		{ FactoryGirl.create :game, winner_id: user_1.id, loser_id: user_2.id }
+
+	context "#users score should change with weighted averages" do
+		it "If expected winner wins, weighted average should be 0.5 and winner gets 5 points" do
+			user_1
+			user_2
+			game
+
+			user_1.score.should == 5
+			user_2.score.should == 2	
+		end
+
+		it "Should change rankings if user_2 beats user_1 in first game" do
+			user_1
+			user_2
+			game_2 = FactoryGirl.create :game, winner_id: user_2.id, loser_id: user_1.id
+			game_3 = FactoryGirl.create :game, winner_id: user_2.id, loser_id: user_1.id
+
+			user_2.ranking.should == 1
+			user_1.ranking.should == 2
+		end
+	end
+end

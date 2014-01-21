@@ -17,6 +17,12 @@ end
 
 group :test do
 	gem 'debugger'
+	gem 'capybara', '1.1.2'
+  gem 'factory_girl_rails', '4.2.0'
+  gem 'database_cleaner', '0.7.0'
+  gem 'rspec-rails', '2.11.0'
+	gem "factory_girl", "~> 4.2.0"
+	gem "awesome_print", "~> 1.2.0"
 end
 
 # Use ActiveModel has_secure_password

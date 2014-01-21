@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
 
-after_save :update_rankings
-
 has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" },
 													 :url  => "/assets/products/:id/:style/:basename.:extension",
 					                 :path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
@@ -18,16 +16,4 @@ validates :password, 							presence: true,
                     							:confirmation => true
 validates :password_confirmation, presence: true
 
-private 
-	def update_rankings
-		if self.ranking == nil
-			@users = User.all
-			@users.order("score desc")
-			ranking = 1
-			@users.each do |x|
-				x.update(ranking:ranking)
-				ranking += 1
-			end
-		end
-	end
 end

@@ -1,7 +1,14 @@
 class Game < ActiveRecord::Base
 	before_save :update_scores
 
+	# validate :winner_does_not_equal_loser
+
 	private
+
+	def winner_does_not_equal_loser 
+		# puts "I got here!!!!"
+		# errors.add(:winner_id, "You can't play yourself silly") if self.winner_id == self.loser_id
+	end
 
 	def update_scores
 		@loser = User.find(self.loser_id)
@@ -11,8 +18,10 @@ class Game < ActiveRecord::Base
 
 		puts "Updated_scores weighted_average: #{@weighted_average}"
 		@winner.score += 10 * @weighted_average
+		puts "Winner: #{@winner.inspect}"
 		@winner.save
 		@loser.score -= 5 * @weighted_average
+		puts "Loser: #{@loser.inspect}"
 		@loser.save
 
 		update_rankings
