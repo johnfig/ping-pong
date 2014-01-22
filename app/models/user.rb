@@ -17,6 +17,6 @@ class User < ActiveRecord::Base
   private
 
   def password_confirmation_should_equal_password
-  	errors.add(:base, "Password can't be the same silly") if self.password != self.password_confirmation
+  	errors.add(:base, "Password needs to be the same silly") if self.password != self.password_confirmation
 	end								 										
 end

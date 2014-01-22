@@ -1,13 +1,13 @@
 class Game < ActiveRecord::Base
 	before_save :update_scores
 
-	# validate :winner_does_not_equal_loser
+	validate :winner_does_not_equal_loser
 
 	private
 
 	def winner_does_not_equal_loser 
-		# puts "I got here!!!!"
-		# errors.add(:winner_id, "You can't play yourself silly") if self.winner_id == self.loser_id
+		puts "I got here!!!!"
+		errors.add(:base, "You can't play yourself silly") if self.winner_id == self.loser_id
 	end
 
 	def update_scores
@@ -43,7 +43,7 @@ class Game < ActiveRecord::Base
 		user_count = User.all.count
 
 		if predicted_outcome == true
-			@weighted_average = 1 * ((expected_winner.ranking - expected_loser.ranking).to_f.abs  / user_count).to_f
+			@weighted_average = ((expected_winner.ranking - expected_loser.ranking).to_f.abs  / user_count).to_f
 			return @weighted_average
 		else
 			@weighted_average = 1 + ((expected_winner.ranking - expected_loser.ranking).to_f.abs / user_count.to_f)
