@@ -15,6 +15,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :production do
+	gem 'rails_12factor'
+end
+
 group :test, :development do
 	gem 'debugger'
 	gem 'capybara', '1.1.2'
