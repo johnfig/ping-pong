@@ -4,8 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-    # @users.ranking.order!("ranking asc")
+    @users = User.ordered_ranked_list
   end
 
   # GET /users/1

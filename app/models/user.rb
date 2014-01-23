@@ -30,4 +30,16 @@ class User < ActiveRecord::Base
 	def create_ranking
 		Ranking.create!(ranking: User.count, user_id: id)
 	end
+
+	def self.ordered_ranked_list
+		ranks = Ranking.all
+		ranks.order("ranking asc")
+		@users_array = []
+		ranks.each do |rank|
+			user = User.find(rank.user_id)
+			@users_array << user
+		end
+
+		return @users_array
+	end
 end
