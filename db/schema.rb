@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120210729) do
+ActiveRecord::Schema.define(version: 20140123012222) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "games", force: true do |t|
     t.integer  "winner_id"
@@ -20,6 +23,16 @@ ActiveRecord::Schema.define(version: 20140120210729) do
     t.datetime "updated_at"
     t.integer  "winner_ranking"
     t.integer  "loser_ranking"
+    t.integer  "winner_score",   default: 0
+    t.integer  "loser_score",    default: 0
+  end
+
+  create_table "rankings", force: true do |t|
+    t.integer  "ranking"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "score",      default: 0
   end
 
   create_table "users", force: true do |t|
@@ -34,8 +47,6 @@ ActiveRecord::Schema.define(version: 20140120210729) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.integer  "ranking"
-    t.integer  "score",                 default: 0
   end
 
 end

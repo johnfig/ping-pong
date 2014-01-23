@@ -15,7 +15,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :test do
+group :test, :development do
 	gem 'debugger'
 	gem 'capybara', '1.1.2'
   gem 'factory_girl_rails', '4.2.0'

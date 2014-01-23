@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Game do
+describe Ranking do
   let(:user_1)  { FactoryGirl.create :user, first_name: "John", 
   																					last_name: "Fig", 
   																					username: "johnfig", 
@@ -16,11 +16,13 @@ describe Game do
   let(:game)		{ FactoryGirl.create :game, winner_id: user_1.id, loser_id: user_2.id }
 
 	context "#users score should change with weighted averages" do
-		it "If expected winner wins, weighted average should be 0.5 and winner gets 5 points" do
+		it "Games outside of 4 weeks should not affect score or ranking" do
+			old_game = FactoryGirl.create :game, winner_id: user_1.id, loser_id: user_2.id, created_at: Time.now - 5.weeks
+
 			user_1
 			user_2
 			game
-
+	
 			user_1.ranking.reload.score.should == 5
 			user_2.ranking.reload.score.should == -2	
 		end
