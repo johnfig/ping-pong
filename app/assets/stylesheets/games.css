@@ -83,6 +83,7 @@
 	margin-right: auto;	
 	background-color: #818486;
 	display: inline;
+	text-decoration: none;
 }
 
 #new_user_button:hover {
@@ -101,6 +102,7 @@
 	margin-right: auto;	
 	background-color: #818486;
 	display: inline;
+	text-decoration: none;
 }
 
 #new_game_button:hover {
