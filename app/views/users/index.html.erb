@@ -1,50 +1,56 @@
-<table>
-  <thead>
-    <tr>
-      <th>
-        <div>
-          <img src="http://i.imgur.com/94pZ4.gif" width="130px" height="130px" />
-        <div>
-      </th>
-      <th>
-        <h1>Leaderboard!</h1>
-      </th>
-      <th>
-        <div>
-          <img src="http://i.imgur.com/94pZ4.gif" width="130px" height="130px" />
-        <div>
-      </th>
-</table>
-<table>
-  <thead>
-    <tr>
-      <th>Profile Pic</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Username</th>
-      <th>Score</th>
-      <th>Ranking</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="full_image">
+  <div class="title-container">
+    <h1 class="title">Byliner Pong</h1>
+    <div id="embedded-image-div"></div>
+  </div>
+  <div class="right">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <div>
+              <img src="http://i.imgur.com/94pZ4.gif" width="130px" height="130px" />
+            <div>
+          </th>
+          <th>
+            <h1>Leaderboard!</h1>
+          </th>
+          <th>
+            <div>
+              <img src="http://i.imgur.com/94pZ4.gif" width="130px" height="130px" />
+            <div>
+          </th>
+    </table>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Profile Pic</th>
+          <th>First</th>
+          <th>Last</th>
+          <th>Username</th>
+          <th>Score</th>
+          <th>Ranking</th>
+        </tr>
+      </thead>
+      <tr></tr>
+      <tr></tr>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>        
+            <td><%= image_tag user.avatar.url(:thumb) %></td>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.username %></td>
+            <td><%= user.ranking.score %></td>
+            <td><%= user.ranking.ranking %></td>  
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>        
-        <td><%= image_tag user.avatar.url(:thumb) %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.username %></td>
-        <td><%= user.ranking.score %></td>
-        <td><%= user.ranking.ranking %></td>  
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <br>
 
-<br>
-
-<%= link_to 'New User', new_user_path %>
-<%= link_to 'New Game', new_game_path %>
+    <%= link_to 'New User', new_user_path %>
+    <%= link_to 'New Game', new_game_path %>
+  </div>
+</div>
