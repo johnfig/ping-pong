@@ -33,8 +33,9 @@ class User < ActiveRecord::Base
 
 	def self.ordered_ranked_list
 		ranks = Ranking.all
-		ranks.order("ranking asc")
-		@users_array = []
+		ranks.order!("ranking asc")
+
+		@users_array = []		
 		ranks.each do |rank|
 			user = User.find(rank.user_id)
 			@users_array << user
