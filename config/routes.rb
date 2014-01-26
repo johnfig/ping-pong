@@ -3,6 +3,13 @@ PingPong::Application.routes.draw do
   root to: 'users#index'   
   resources :games
   resources :users
+  namespace :api, path: 'api', defaults: { format: 'json' } do
+    namespace :v1, path: 'v1', defaults: { format: 'json' } do
+      resources :login, only: [:create]
+      resources :leaderboard, only: [:index]
+    end
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
