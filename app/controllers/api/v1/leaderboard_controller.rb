@@ -2,12 +2,13 @@ class Api::V1::LeaderboardController < ApplicationController
   def index
     @users = User.ordered_ranked_list
     leaderboard_array = @users.map do |user|
-    	user_push = {
+    	user_push = { user: {
     		first_name: user.first_name,
     		last_name: user.last_name,
     		username: user.username,
     		ranking: user.ranking,
     		photo: user.avatar.url
+    		}
     	}
 
     	user_push

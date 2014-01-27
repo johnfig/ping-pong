@@ -9,7 +9,7 @@ class Api::V1::LoginController < ApplicationController
 				message: 'You have successfully logged in!'
 			}
 			render json: success_hash
-		else
+		else 	
 			failure_hash = {
 				failure: 'failure',
 				message: 'User cannot be found'
