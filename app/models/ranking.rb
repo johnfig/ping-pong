@@ -1,5 +1,7 @@
 class Ranking < ActiveRecord::Base
 
+	# associations
+	has_one :user
 
 	def self.update_score
 		@users = User.all
