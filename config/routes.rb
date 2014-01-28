@@ -7,6 +7,7 @@ PingPong::Application.routes.draw do
     namespace :v1, path: 'v1', defaults: { format: 'json' } do
       resources :login, only: [:create]
       resources :leaderboard, only: [:index]
+      resources :games, only: [:create]
     end
   end
 
