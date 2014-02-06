@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	
+
 	# associations
 	has_one :ranking
 
@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
   def password_confirmation_should_equal_password
   	errors.add(:base, "Password needs to be the same silly") if self.password != self.password_confirmation
-	end								 										
+	end
 
 	def create_ranking
 		Ranking.create!(ranking: User.count, user_id: id)
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 		ranks = Ranking.all
 		ranks.order!("ranking asc")
 
-		@users_array = [] 		
+		@users_array = []
 		ranks.each do |rank|
 			user = User.find(rank.user_id)
 			@users_array << user

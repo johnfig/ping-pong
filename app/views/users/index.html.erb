@@ -37,13 +37,13 @@
       <tr></tr>
       <tbody>
         <% @users.each do |user| %>
-          <tr>        
+          <tr>
             <td><%= image_tag user.avatar.url(:thumb) %></td>
             <td><%= user.first_name %></td>
             <td><%= user.last_name %></td>
             <td><%= user.username %></td>
-            <td><%= user.ranking.score %></td>
-            <td><%= user.ranking.ranking %></td>  
+            <td><%= user.ranking.display_score %></td>
+            <td><%= user.ranking.ranking %></td>
           </tr>
         <% end %>
       </tbody>
@@ -55,7 +55,7 @@
       <a id="new_user_button" href="#">New User</a>
       <a id="new_game_button" href="#">New Game</a>
     <div>
-    
+
     <div class="new_user">
       <%= render :partial => 'users/form' %>
     </div>

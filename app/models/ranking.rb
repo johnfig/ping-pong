@@ -3,6 +3,10 @@ class Ranking < ActiveRecord::Base
 	# associations
 	has_one :user
 
+	def display_score
+		[score, 0].max
+	end
+
 	def self.update_score
 		@users = User.all
 		@games = Game.where("created_at > ?", Time.now - 4.weeks)
